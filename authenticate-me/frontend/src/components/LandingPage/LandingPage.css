@@ -1,0 +1,92 @@
+.landing-body {
+  background-image: url(../../assets/10914724_808118992575426_8559069484861932145_o.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  display: flex;
+  flex-flow: column;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: 5s;
+}
+
+.landing-text-container {
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: whitesmoke;
+  text-shadow: -1px -1px 10px black;
+  z-index: 1;
+  margin: 15%;
+}
+
+.landing-title {
+  margin: 5%;
+  font-size: 50px;
+}
+
+.landing-text {
+    font-size: 25px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.landing-body {
+  animation-name: animate;
+  animation-direction: alternate-reverse;
+  animation-duration: 40s;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes animate {
+  0% {
+    background-image: url(../../assets/10714200_763945440326115_985818632747925958_o.jpg);
+  }
+
+  10% {
+    background-image: url(../../assets/1557281_763944010326258_2702522997359478684_o.jpg);
+  }
+
+  20% {
+    background-image: url(../../assets/DSCN0831.JPG);
+  }
+
+  30% {
+    background-image: url(../../assets/IMG_0955.JPG);
+  }
+
+  40% {
+    background-image: url(../../assets/IMG_0483.JPG);
+  }
+
+  50% {
+    background-image: url(../../assets/IMG_0491.JPG);
+  }
+
+  60% {
+    background-image: url(../../assets/IMG_0820.JPG);
+  }
+
+  70% {
+    background-image: url(../../assets/IMG_0968.JPG);
+  }
+
+  80% {
+    background-image: url(../../assets/IMG_1120.JPG);
+  }
+
+  90% {
+    background-image: url(../../assets/IMG_1351.JPG);
+  }
+
+  100% {
+    background-image: url(../../assets/10914724_808118992575426_8559069484861932145_o.jpg);
+  }
+
+}
