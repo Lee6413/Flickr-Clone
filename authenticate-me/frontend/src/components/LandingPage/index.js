@@ -9,7 +9,11 @@ const LandingPage = () => {
 
   if(sessionUser) {
     history.push('/');
-    return null;
+    return (
+      <div className="li-body">
+        <h1>Logged in LandingPage</h1>
+      </div>
+    );
   }
 
   return (
