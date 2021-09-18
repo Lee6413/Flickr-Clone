@@ -14,11 +14,12 @@ module.exports = {
         references: {model: "Users"},
       },
       albumId: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER,
         references: {model: "Albums"},
       },
       imageUrl: {
+        unique: true,
         allowNull: false,
         type: Sequelize.STRING
       },

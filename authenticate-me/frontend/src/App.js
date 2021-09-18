@@ -6,7 +6,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import LandingPage from "./components/LandingPage"
 import Navigation from "./components/Navigation";
-import ImagesPage from "./components/ImagesPage"
+import UploadFormPage from "./components/UploadFormPage"
 import "./index.css"
 
 function App() {
@@ -30,8 +30,8 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/images/new">
-            <ImagesPage />
+          <Route path="/upload">
+            <UploadFormPage />
           </Route>
         </Switch>
       )}
