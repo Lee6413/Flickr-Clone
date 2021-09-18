@@ -31,7 +31,7 @@ function ProfileButton({ user }) {
 
   return (
     <>
-    <NavLink className="nav-link" to="/images/new">Photos</NavLink>
+    <NavLink className="nav-link" to="/upload">Upload</NavLink>
       <button onClick={openMenu}>
         <i className="fas fa-user-circle" />
       </button>
