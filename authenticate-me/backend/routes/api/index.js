@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const commentRouter = require('./comments.js');
+const commentsRouter = require('./comments.js');
 const photosRouter = require('./photos.js');
 const sessionRouter = require('./session.js');
 const albumsRouter = require('./albums.js')
