@@ -1,4 +1,6 @@
 'use strict';
+const { User } = require("./user");
+const { Photo } = require("./photo");
 module.exports = (sequelize, DataTypes) => {
   const Comment = sequelize.define('Comment', {
     userId: DataTypes.INTEGER,
