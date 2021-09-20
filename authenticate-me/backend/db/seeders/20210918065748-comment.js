@@ -3,12 +3,12 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
      return queryInterface.bulkInsert('Comments', [
-       {userId: 2, imageId: 1, comment:"Nice1"},
-       {userId: 3, imageId: 2, comment:"Nice2"},
-       {userId: 3, imageId: 3, comment:"Nice3"},
-       {userId: 1, imageId: 4, comment:"Nice4"},
-       {userId: 2, imageId: 5, comment:"Nice5"},
-       {userId: 1, imageId: 6, comment:"Nice6"},
+       {userId: 2, photoId: 1, content:"Nice1"},
+       {userId: 2, photoId: 2, content:"Nice2"},
+       {userId: 1, photoId: 3, content:"Nice3"},
+       {userId: 1, photoId: 4, content:"Nice4"},
+       {userId: 2, photoId: 5, content:"Nice5"},
+       {userId: 1, photoId: 6, content:"Nice6"},
      ], {});
     },
 
