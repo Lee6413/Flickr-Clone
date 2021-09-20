@@ -3,12 +3,18 @@ module.exports = (sequelize, DataTypes) => {
   const Comment = sequelize.define('Comment', {
     userId: DataTypes.INTEGER,
     imageId: DataTypes.INTEGER,
-    comment: DataTypes.STRING
+    content: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [10, 120],
+      }
+    },
   }, {});
   Comment.associate = function(models) {
     // associations can be defined here
     Comment.belongsTo(models.User, {foreignKey: "userId"})
-    Comment.belongsTo(models.Image, {foreignKey: "photoId"})
+    Comment.belongsTo(models.Photo, { foreignKey: 'photoId',  hooks: true });
   };
   return Comment;
 };
