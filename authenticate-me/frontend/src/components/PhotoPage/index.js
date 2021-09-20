@@ -19,9 +19,9 @@ const PhotoPage = () => {
       fetchData();
     }, [dispatch])
 
-    // if (!photos.length) {
-    //     return null;
-    //   }
+    if (!photos.length) {
+        return null;
+      }
     return (
       <main>
         <div id="image-container">
