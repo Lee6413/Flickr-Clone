@@ -1,6 +1,7 @@
 'use strict';
 const { User } = require("./user");
-
+const { AlbumPhoto } = require("./albumphoto")
+const { Comments } = require("./comment");
 module.exports = (sequelize, DataTypes) => {
   const Photo = sequelize.define('Photo', {
     userId: {
@@ -26,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   }, {});
-  Image.associate = function(models) {
+  Photo.associate = function(models) {
     // associations can be defined here
     Photo.belongsTo(models.User, { foreignKey: 'userId', hooks: true });
     Photo.hasMany(models.AlbumPhoto, { foreignKey: 'albumId', onDelete: 'cascade', hooks: true });
