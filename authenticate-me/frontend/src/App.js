@@ -5,8 +5,8 @@ import * as sessionActions from "./store/session";
 import SignupFormPage from "./components/SignupFormPage";
 import LandingPage from "./components/LandingPage"
 import Navigation from "./components/Navigation";
-import ImagePage from "./components/ImagePage";
-import UploadFormPage from "./components/UploadFormPage"
+import PhotoPage from "./components/PhotoPage";
+import SinglePhotoPage from "./components/SinglePhotoPage"
 import "./index.css"
 
 function App() {
@@ -27,11 +27,11 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/images">
-            <ImagePage />
+          <Route path="/photos">
+            <PhotoPage />
           </Route>
-          <Route path="/upload">
-            <UploadFormPage />
+          <Route path="/photos/:photoId">
+            <SinglePhotoPage />
           </Route>
         </Switch>
       )}
