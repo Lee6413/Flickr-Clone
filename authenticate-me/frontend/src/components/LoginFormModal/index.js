@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import LoginForm from './LoginForm';
-
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 

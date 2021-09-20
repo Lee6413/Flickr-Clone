@@ -86,7 +86,7 @@ export const deletePhoto = (photo) => async dispatch => {
     switch (action.type) {
       case LOAD: {
         const allPhotos = {};
-        action.list.forEach(photo => {
+        action.photos.forEach(photo => {
             allPhotos[photo.id] = photo;
         });
         return {
