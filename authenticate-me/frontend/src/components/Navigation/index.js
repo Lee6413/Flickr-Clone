@@ -26,6 +26,7 @@ function Navigation({ isLoaded }){
 
   return (
     <nav className="nav-container">
+      <>
       <div className="nav-logo">
         <NavLink exact to="/" className="nav-link">
           <i className="fab fa-flickr"></i>
@@ -37,6 +38,7 @@ function Navigation({ isLoaded }){
           {isLoaded && sessionLinks}
         </li>
       </ul>
+      </>
     </nav>
   );
 }
