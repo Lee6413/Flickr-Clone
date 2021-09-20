@@ -1,24 +1,22 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Albums', {
+    return queryInterface.createTable('AlbumPhotos', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
+      photoId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: {model: "Users"},
+        references: {model: "Photos"},
       },
-      title: {
+      albumId: {
         allowNull: false,
-        type: Sequelize.STRING(50)
-      },
-      description: {
-        type: Sequelize.STRING(255)
+        type: Sequelize.INTEGER,
+        references: {model: "Albums"},
       },
       createdAt: {
         allowNull: false,
@@ -30,9 +28,19 @@ module.exports = {
         defaultValue: new Date(),
         type: Sequelize.DATE
       }
-    });
+    },
+
+    { indexes: [
+      {
+        name: 'photoAlbumIndex',
+        unique: true,
+        fields: ['photoId', 'albumId']
+      },
+    ]
+  }
+    );
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Albums');
+    return queryInterface.dropTable('AlbumPhotos');
   }
 };

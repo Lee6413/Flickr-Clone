@@ -1,55 +1,60 @@
-import React, { useState } from 'react';
-import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { Redirect } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, Link } from 'react-router-dom';
+import * as uploadActions from "../../store/upload";
+import * as sessionActions from '../../store/session';
 import './UploadFormPage.css'
 
 function UploadFormPage() {
+  const dispatch = useDispatch()
   const history = useHistory();
   const sessionUser = useSelector(state => state.session.user);
 
   const [imageUrl, setImageUrl] = useState('');
   const [content, setContent] = useState('');
 
-
-  if( sessionUser) {
-    history.push('/upload');
-    // <Redirect to="/" />
+  const onSubmit = (e) => {
+    e.preventDefault();
+    let userId = sessionUser.id
+    window.location.replace('/images')
+    return dispatch(uploadActions.uploadImage({userId, imageUrl, content}))
   }
 
-
   return (
-    <>
-    <div className='body'>
-      <h1>Upload Form</h1>
-    </div>
-    <div className='form'>
-      <form>
-        {/* <ul>
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul> */}
+    <div className="wrapper">
+      <div className="form_container">
+      <div className="title_container">
+      <h2 className="header">Upload An Image!</h2>
+      </div>
+      <form onSubmit={onSubmit} className='upload-form'>
         <label>
           Image URL
-          <input
+        </label>
+          <input className='form-input-url'
             type="text"
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
+            placeholder="Image Url"
             required
           />
-        </label>
+      {/* <div className="input_field"> <span><i aria-hidden="true" className="caption"></i></span> */}
         <label>
           Content
+        </label>
           <textarea
             type="text"
             value={content}
             onChange={(e) => setContent(e.target.value)}
+            placeholder='Caption your image!'
+            rows="4"
+            cols="30"
             required
           />
-        </label>
-        <button type="submit">Submit</button>
+        {/* </div> */}
+        <button className="button" type="submit" >Upload Post</button>
       </form>
       </div>
-    </>
+    </div>
   );
 }
 
