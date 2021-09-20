@@ -2,19 +2,19 @@ import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import './LandingPage.css'
 
-const LandingPage = () => {
-  const history = useHistory();
+function LandingPage() {
+  // const history = useHistory();
 
-  const sessionUser = useSelector(state => state.session.user);
+  // const sessionUser = useSelector(state => state.session.user);
 
-  if(sessionUser) {
-    history.push('/');
-    return (
-      <div className="li-body">
-        <h1>Logged in LandingPage</h1>
-      </div>
-    );
-  }
+  // if(sessionUser) {
+  //   history.push('/');
+  //   return (
+  //     <div className="li-body">
+  //       <h1>Logged in LandingPage</h1>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="landing-body">

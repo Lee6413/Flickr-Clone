@@ -6,6 +6,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import LandingPage from "./components/LandingPage"
 import Navigation from "./components/Navigation";
+import ImagePage from "./components/ImagePage";
 import UploadFormPage from "./components/UploadFormPage"
 import "./index.css"
 
@@ -29,6 +30,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/images">
+            <ImagePage />
           </Route>
           <Route path="/upload">
             <UploadFormPage />

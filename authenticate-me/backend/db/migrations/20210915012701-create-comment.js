@@ -13,14 +13,14 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {model: "Users"},
       },
-      imageId: {
+      photoId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: {model: "Images"},
+        references: {model: "Photos"},
       },
-      comment: {
+      content: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING(255)
       },
       createdAt: {
         allowNull: false,

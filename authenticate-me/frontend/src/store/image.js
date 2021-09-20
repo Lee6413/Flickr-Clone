@@ -10,7 +10,7 @@ const getImages = (images) => {
 }
 
 //Thunk
-export const  getAllImages = () => async (dispatch) => {
+export const getAllImages = () => async (dispatch) => {
   const res = await csrfFetch(`/api/images`)
 
   if( res.ok ){

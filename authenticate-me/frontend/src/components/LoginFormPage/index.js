@@ -12,7 +12,7 @@ function LoginFormPage() {
   const [errors, setErrors] = useState([]);
 
   if (sessionUser) return (
-    <Redirect to="/" />
+    <Redirect to="/images" />
   );
 
   const handleSubmit = (e) => {
@@ -26,31 +26,35 @@ function LoginFormPage() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-      </ul>
-      <label>
-        Username or Email
-        <input
-          type="text"
-          value={credential}
-          onChange={(e) => setCredential(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
-      <button type="submit">Log In</button>
-    </form>
-  );
+    <div className="form-container">
+      <div className="form-wrapper">
+      <form onSubmit={handleSubmit} className="signup-form">
+        <ul>
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>
+        <label className="form-headers">
+          Username or Email
+        </label>
+          <input
+            type="text"
+            value={credential}
+            onChange={(e) => setCredential(e.target.value)}
+            required
+          />
+        <label className="form-headers">
+          Password
+        </label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        <button type="submit">Log In</button>
+      </form>
+      </div>
+    </div>
+);
 }
 
 export default LoginFormPage;
