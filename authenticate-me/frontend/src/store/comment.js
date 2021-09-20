@@ -79,8 +79,7 @@ export const deleteComment = (comment) => async dispatch => {
       return true;
     }
   }
-
-
+  
   const initialState = {};
 
   const commentReducer = (state = initialState, action) => {
