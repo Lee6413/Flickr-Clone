@@ -1,109 +1,133 @@
-import { csrfFetch } from "./csrf";
+import { csrfFetch } from './csrf';
 
-const EVERY_COMMENT = 'comment/EVERY_COMMENT';
-const POST_COMMENT = 'comment/POST_COMMENT';
-const UPDATE_COMMENT = 'comment/UPDATE_COMMENT';
-const DELETE_COMMENT = 'comment/DELETE_COMMENT';
+const LOAD = 'comments/LOAD';
+const ADD = 'comments/ADD';
+const REMOVE = 'comments/REMOVE'
+const UPDATE = 'comments/UPDATE'
 
-const everyComment = (comments) => ({
-    type: EVERY_COMMENT,
-    comments
-});
+const load = comments => ({
+    type: LOAD,
+    comments,
+  });
 
-const postComment = (comment) => ({
-    type: POST_COMMENT,
-    comment
-});
+const addComment = comment => ({
+    type: ADD,
+    comment,
+  });
 
-const updateComment = (comment ) => ({
-    type: UPDATE_COMMENT,
-    comment
-});
+const removeComment = commentId => ({
+    type: REMOVE,
+    commentId,
+  });
 
-const deleteComment = (id) => ({
-    type: DELETE_COMMENT,
-    id
-});
+export const getComments = (photoId) => async dispatch => {
+    const response = await csrfFetch(`/api/photos/${photoId}/comments`);
 
-export const everyCommentThunk = (id) => async(dispatch) => {
-  const res = await csrfFetch(`/api/comments/pic/${id}`)
-  if(res.ok) {
-    const allComments = await res.json()
-    dispatch(everyComment(allComments))
+    if (response.ok) {
+      const comments = await response.json();
+      dispatch(load(comments));
+
+    }
+  };
+
+export const retrieveComment = (commentId) => async dispatch => {
+    const response = await csrfFetch(`/api/comments/${commentId}`)
+    if (response.ok) {
+      const comment = await response.json();
+      dispatch(addComment(comment))
+    }
   }
-}
 
-//create comment
-export const createCommentThunk = payload => async(dispatch) => {
-  const res = await csrfFetch('/api/comments', {
+export const createComment = (Comment) => async dispatch => {
+  const response = await csrfFetch(`/api/photos/${Comment.photoId}/comments`, {
     method: 'POST',
-    body: JSON.stringify(payload)
-  });
-
-  const newComment = await res.json();
-  dispatch(postComment(newComment))
-  return newComment
-}
-
-//edit comment
-export const updateCommentThunk = ({commentId, comment}) => async(dispatch) => {
-  const res = await csrfFetch(`/api/comments/${commentId}`, {
-    method: 'PUT',
-    body: JSON.stringify({comment})
-  });
-
-  const data = await res.json();
-  dispatch(updateComment(data))
-}
-
-//delete comment
-export const deleteCommentThunk = (id) => async(dispatch) => {
-  const res = await csrfFetch(`/api/comments/${id}`, {
-    method: 'DELETE'
-  });
-
-  if(res.ok) {
-    await res.json()
-    dispatch(deleteComment(id))
-    return res
-}
-}
-
-const initialState = {}
-
-const commentReducer = (state = initialState, action) => {
-  let newState = {}
-  switch (action.type) {
-    case POST_COMMENT:
-      newState = {
-          ...state,
-          [action.comment.id]: action.comment
-      }
-      return newState
-
-    case EVERY_COMMENT:
-      const allComments = {}
-      action.comments.forEach(cmnt => {
-          allComments[cmnt.id] = cmnt;
-      })
-      return {
-          ...newState,
-          ...allComments
-      }
-
-    case DELETE_COMMENT:
-      newState = { ...state}
-      delete newState[action.id]
-      return newState
-
-    case UPDATE_COMMENT:
-      return {
-          ...state,
-          [action.comment.id]: action.comment
-      }
-      default:
-          return state;
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(Comment),
+  })
+  if (response.ok) {
+    const newComment = await response.json();
+    const commentResult = await dispatch(addComment(newComment))
+    return commentResult;
+  }
+  else{
+    const errorResponse = await response.json();
+    return errorResponse;
   }
 }
 
-export default commentReducer
+export const editComment = (comment) => async dispatch => {
+    const response = await csrfFetch(`/api/comments/${comment.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(comment),
+    })
+    if (response.ok) {
+      const editedComment = await response.json();
+      dispatch(addComment(editedComment))
+      return editedComment;
+    }
+  }
+
+export const deleteComment = (comment) => async dispatch => {
+    const response = await csrfFetch(`/api/comments/${comment.id}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(comment),
+    })
+    if (response.ok) {
+      dispatch(removeComment(comment.id))
+      return true;
+    }
+  }
+
+
+  const initialState = {};
+
+  const commentReducer = (state = initialState, action) => {
+    switch (action.type) {
+     case LOAD: {
+            const allComments = {};
+            action.comments.forEach(comment => {
+                allComments[comment.id] = comment;
+            });
+            return {
+              ...allComments,
+              ...state,
+        };
+        }
+      case ADD: {
+        if (!state[action.comment.id]) {
+          const newState = {
+            ...state,
+            [action.comment.id]: action.comment
+          };
+          return newState;
+        }
+        return {
+          ...state,
+          [action.comment.id]: {
+            ...action.comment,
+          }
+        };
+      }
+      case REMOVE: {
+          const newState = { ...state };
+          delete newState[ action.commentId];
+          return newState;
+        }
+      case UPDATE:{
+        return {
+            ...state,
+            [action.comment.id]: {
+              ...state[action.comment.id],
+              ...action.comment,
+            }
+          };
+      }
+      default: {
+        return state;
+    }
+  }
+}
+
+export default commentReducer;

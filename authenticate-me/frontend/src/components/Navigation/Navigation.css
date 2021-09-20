@@ -1,3 +1,7 @@
+.nav-site-link-container {
+  background-color: blue;
+}
+
 .nav-container {
   position: fixed;
   top: 0;
