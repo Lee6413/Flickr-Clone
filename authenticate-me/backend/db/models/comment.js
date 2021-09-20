@@ -4,7 +4,7 @@ const { Photo } = require("./photo");
 module.exports = (sequelize, DataTypes) => {
   const Comment = sequelize.define('Comment', {
     userId: DataTypes.INTEGER,
-    imageId: DataTypes.INTEGER,
+    photoId: DataTypes.INTEGER,
     content: {
       type: DataTypes.STRING,
       allowNull: false,

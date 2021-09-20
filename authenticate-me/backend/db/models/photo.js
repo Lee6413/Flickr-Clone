@@ -1,6 +1,5 @@
 'use strict';
 const { User } = require("./user");
-const { AlbumPhoto } = require("./albumphoto")
 const { Comments } = require("./comment");
 module.exports = (sequelize, DataTypes) => {
   const Photo = sequelize.define('Photo', {
